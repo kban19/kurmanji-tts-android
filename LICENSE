@@ -1,0 +1,62 @@
+Kurmanji-TTS Proprietary License
+Copyright (c) 2026 Sipano. All rights reserved.
+
+Kurmanji-TTS (the "Application"), including its name, logo, user interface,
+voice catalogue, packaged model configuration and all accompanying
+documentation, is proprietary software. The Application is closed source: its
+source code is not published and is not licensed to you.
+
+1. PERMITTED USE
+
+   You are granted a personal, non-exclusive, non-transferable, revocable
+   licence to download the official Application package from its official
+   distribution page and to install and use it on devices that you own or
+   control, for personal, non-commercial purposes.
+
+2. RESTRICTIONS
+
+   You may not:
+   a. copy, publish, upload, mirror, redistribute, sell, rent, lease or
+      sublicense the Application or any part of it, except for the unmodified
+      official package obtained from the official distribution page, shared
+      as-is and free of charge;
+   b. modify, adapt, translate, patch or create derivative works of the
+      Application;
+   c. reverse engineer, decompile, disassemble or otherwise attempt to derive
+      the source code, except to the extent that such activity is expressly
+      permitted by applicable law notwithstanding this limitation;
+   d. remove, obscure or alter any copyright, licence or attribution notice,
+      or the application's signing identity;
+   e. use the name "Kurmanji-TTS", the name "Sipano" or the application icon to
+      endorse or promote another product without prior written permission.
+
+3. THIRD-PARTY COMPONENTS
+
+   The Application includes third-party components listed in
+   THIRD_PARTY_NOTICES.md. Those components remain governed by their own
+   licences (MIT and Apache License 2.0) and nothing in this licence restricts
+   the rights granted to you by those licences.
+
+4. NO WARRANTY
+
+   THE APPLICATION IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+   OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. YOU USE THE
+   APPLICATION AT YOUR OWN RISK.
+
+5. LIMITATION OF LIABILITY
+
+   TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE AUTHOR SHALL NOT BE
+   LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+   CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+   APPLICATION OR ITS USE.
+
+6. TERMINATION
+
+   This licence terminates automatically if you breach any of its terms. On
+   termination you must stop using the Application and delete all copies you
+   hold.
+
+7. CONTACT
+
+   Licensing questions: Sipano, https://www.instagram.com/sipan0o
