@@ -1,138 +1,539 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kurmanji-TTS — Download</title>
-<meta name="description" content="Offline Kurmanji (Northern Kurdish) text-to-speech for Android. Download the APK built for your device.">
+<title>Kurmanji-TTS — Offline Kurmanji text-to-speech for Android</title>
+<meta name="description" content="90 neural Kurmanji voices, a two-voice dialogue studio and a system-wide TTS engine — all offline, with no INTERNET permission. Download the signed APK for your device.">
+<meta name="theme-color" content="#FBF8F2">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kurmanji-TTS — offline Kurmanji text-to-speech">
+<meta property="og:description" content="90 neural voices, a dialogue studio and a system-wide TTS engine. No internet, no accounts, no telemetry.">
+<meta property="og:image" content="https://github.com/kban19/kurmanji-tts-android/raw/main/screenshots/01_home.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23F0C258'/%3E%3Cg stroke='%23281B00' stroke-width='5' stroke-linecap='round'%3E%3Cpath d='M18 30v4M26 24v16M34 18v28M42 26v12M50 30v4'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0b0f14; --card:#131a22; --card2:#182230; --line:#24313f;
-    --text:#e8eef5; --muted:#8fa3b8; --accent:#3ea6ff; --accent2:#25c2a0;
+    --paper:#FBF8F2; --paper-2:#F4EDDF; --surface:#FFFDF8;
+    --ink:#211C14; --ink-soft:#5C5447; --line:#DFD5C5; --line-soft:#EAE2D3;
+    --amber:#F0C258; --amber-deep:#8C5A00; --amber-soft:#FFE8B8; --amber-ink:#2C1B00;
+    --green:#2F6B4F; --green-soft:#D5F1E1; --green-ink:#0B3A26;
+    --espresso:#2A2118; --cream:#F7F1E7;
+    --serif:"Fraunces",Georgia,"Times New Roman",serif;
+    --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --ar:"IBM Plex Sans Arabic","Noto Kufi Arabic",system-ui,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --radius:18px;
+    --shadow-sm:0 1px 2px rgba(33,28,20,.06),0 8px 24px -12px rgba(33,28,20,.18);
+    --shadow-lg:0 2px 4px rgba(33,28,20,.05),0 34px 64px -30px rgba(33,28,20,.38);
+    --max:1120px;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:radial-gradient(1200px 600px at 50% -200px,#16324a 0%,var(--bg) 55%);
-       color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Kufi Arabic",sans-serif}
-  .wrap{max-width:900px;margin:0 auto;padding:48px 20px 72px}
-  header{text-align:center;margin-bottom:32px}
-  .logo{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--accent),var(--accent2));
-        display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:26px;color:#04121d}
-  h1{font-size:34px;margin:16px 0 6px;letter-spacing:-.5px}
-  .tag{color:var(--muted);margin:0}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
-  .hero{text-align:center;margin:28px 0}
-  .btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--accent),#2f8de0);
-       color:#04121d;font-weight:700;font-size:18px;padding:16px 28px;border-radius:12px;text-decoration:none;
-       box-shadow:0 10px 30px rgba(62,166,255,.25)}
-  .btn.alt{background:var(--card2);color:var(--text);border:1px solid var(--line);box-shadow:none;font-size:15px;padding:12px 20px}
-  .btn:active{transform:translateY(1px)}
-  .detected{color:var(--muted);font-size:14px;margin:12px 0 0}
-  .detected b{color:var(--text)}
-  .ar{direction:rtl;text-align:right;font-family:"Noto Kufi Arabic",system-ui,sans-serif}
-  h2{font-size:20px;margin:36px 0 14px}
-  table{width:100%;border-collapse:collapse;font-size:14px}
-  th,td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:left}
-  th{color:var(--muted);font-weight:600}
-  td.name{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
-  .sha{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;color:var(--muted);word-break:break-all}
-  .pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;background:#1d2b3a;color:var(--muted)}
-  .rec{background:rgba(62,166,255,.12);border-left:3px solid var(--accent)}
-  ol,ul{padding-left:20px}
-  .ar ol,.ar ul{padding-left:0;padding-right:20px}
-  li{margin:6px 0}
-  code{background:#0e151d;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:13px}
-  footer{margin-top:44px;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid var(--line);padding-top:20px}
-  a{color:var(--accent)}
-  @media(max-width:560px){h1{font-size:27px}.wrap{padding:32px 16px 56px}th:nth-child(3),td:nth-child(3){display:none}}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;color:var(--ink);font:16px/1.6 var(--sans);overflow-x:clip;
+    background:
+      radial-gradient(900px 540px at 84% -12%, rgba(240,194,88,.38), transparent 64%),
+      radial-gradient(720px 460px at -8% 16%, rgba(47,107,79,.10), transparent 62%),
+      var(--paper);
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%}
+  a{color:inherit}
+  code{font-family:var(--mono);font-size:.88em;background:var(--paper-2);border:1px solid var(--line-soft);border-radius:5px;padding:1px 5px}
+  .grain{
+    position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.045;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply;
+  }
+  .skip{
+    position:absolute;left:-999px;top:12px;z-index:100;background:var(--ink);color:var(--cream);
+    padding:10px 16px;border-radius:10px;font-weight:600
+  }
+  .skip:focus{left:16px}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  :focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+  /* ---------- navigation ---------- */
+  .nav{
+    position:sticky;top:0;z-index:40;
+    background:rgba(251,248,242,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(223,213,197,.65)
+  }
+  .nav-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:28px}
+  .brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-weight:700;letter-spacing:-.01em}
+  .brand-mark{width:32px;height:32px;border-radius:50%;background:var(--amber);display:grid;place-items:center;box-shadow:inset 0 -2px 0 rgba(44,27,0,.14)}
+  .brand-mark svg{display:block}
+  .nav-links{margin-left:auto;display:flex;align-items:center;gap:26px;font-size:14.5px;font-weight:500;color:var(--ink-soft)}
+  .nav-links a{text-decoration:none;transition:color .18s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-gh{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:9px 14px;min-height:42px;color:var(--ink);background:var(--surface);transition:border-color .18s,transform .18s}
+  .nav-gh:hover{border-color:var(--amber-deep);transform:translateY(-1px)}
+  .nav-version{font-family:var(--mono);font-size:12px;color:var(--ink-soft);border:1px solid var(--line-soft);padding:4px 9px;border-radius:999px}
+
+  /* ---------- hero ---------- */
+  .hero{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:48px;align-items:center;padding:76px 0 70px}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;margin:0 0 20px;font-size:12.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--amber-deep)}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(47,107,79,.14)}
+  h1{
+    font-family:var(--serif);font-weight:600;font-size:clamp(54px,7.6vw,92px);line-height:.94;
+    letter-spacing:-.035em;margin:0 0 22px;font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 120
+  }
+  h1 em{font-style:italic;color:var(--amber-deep);font-variation-settings:"SOFT" 90,"WONK" 1,"opsz" 120}
+  .lede{font-size:17.5px;line-height:1.65;color:var(--ink-soft);max-width:52ch;margin:0 0 30px}
+  .lede b{color:var(--ink);font-weight:600}
+  .cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+  .btn-main{
+    display:inline-flex;align-items:center;gap:14px;text-decoration:none;
+    background:var(--amber);color:var(--amber-ink);border-radius:14px;padding:13px 20px 13px 14px;
+    box-shadow:0 14px 32px -14px rgba(140,90,0,.6),inset 0 -2px 0 rgba(44,27,0,.14);
+    transition:transform .18s,box-shadow .18s
+  }
+  .btn-main:hover{transform:translateY(-2px);box-shadow:0 20px 38px -16px rgba(140,90,0,.65),inset 0 -2px 0 rgba(44,27,0,.14)}
+  .btn-main:active{transform:translateY(0)}
+  .btn-icon{width:38px;height:38px;border-radius:10px;background:var(--amber-ink);display:grid;place-items:center;flex:none}
+  .btn-icon svg{stroke:var(--amber);width:19px;height:19px}
+  .btn-text{display:flex;flex-direction:column;line-height:1.25;text-align:left}
+  .btn-text strong{font-size:16px;letter-spacing:-.01em}
+  .btn-text small{font-size:12px;font-weight:600;color:#5B4310}
+  .btn-ghost{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:14.5px;color:var(--ink);border-bottom:1.5px solid var(--line);padding:6px 2px;transition:border-color .18s,color .18s}
+  .btn-ghost:hover{border-color:var(--amber-deep);color:var(--amber-deep)}
+  .detect{font-size:13px;color:var(--ink-soft);margin:14px 0 0}
+  .detect b{color:var(--ink);font-family:var(--mono);font-size:12.5px}
+  .detect a{color:var(--amber-deep);font-weight:600;text-decoration:none}
+  .detect a:hover{text-decoration:underline}
+  .trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin:28px 0 0;padding:0;list-style:none;font-size:13px;font-weight:500;color:var(--ink-soft)}
+  .trust li{display:flex;align-items:center;gap:7px}
+  .trust svg{width:15px;height:15px;stroke:var(--green);flex:none}
+
+  .devices{position:relative;min-height:560px;display:flex;align-items:center;justify-content:center}
+  .devices::before{
+    content:"";position:absolute;width:78%;aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(closest-side,rgba(240,194,88,.5),rgba(240,194,88,0));
+    filter:blur(6px);z-index:0
+  }
+  .phone{background:#2B241C;border-radius:38px;padding:9px;box-shadow:var(--shadow-lg);min-width:0}
+  .phone img{display:block;width:100%;height:auto;border-radius:30px;aspect-ratio:9/20;object-fit:cover}
+  .phone-front{position:relative;z-index:2;width:min(262px,64vw);transform:rotate(-2.2deg)}
+  .phone-back{position:absolute;z-index:1;width:min(208px,50vw);left:61%;top:-4%;transform:rotate(7.5deg);opacity:.94}
+  .chip{
+    position:absolute;z-index:4;display:inline-flex;align-items:center;gap:7px;
+    font-size:12.5px;font-weight:600;padding:9px 13px;border-radius:999px;
+    border:1px solid rgba(33,28,20,.08);box-shadow:var(--shadow-sm)
+  }
+  .chip i{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.75}
+  .chip-voices{left:5%;top:7%;background:var(--amber-soft);color:var(--amber-ink);transform:rotate(-3deg)}
+  .chip-offline{right:2%;bottom:9%;background:var(--green-soft);color:var(--green-ink);transform:rotate(2deg)}
+
+  /* ---------- features ---------- */
+  .features{border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);background:rgba(255,253,248,.66)}
+  .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:10px 0}
+  .feature{display:flex;gap:14px;padding:22px 24px;align-items:flex-start}
+  .feature + .feature{border-left:1px solid var(--line-soft)}
+  .feature-icon{width:40px;height:40px;border-radius:12px;background:var(--amber-soft);color:var(--amber-deep);display:grid;place-items:center;flex:none}
+  .feature-icon svg{width:20px;height:20px;stroke:currentColor}
+  .feature h3{margin:1px 0 3px;font-size:14.5px;letter-spacing:-.01em}
+  .feature p{margin:0;font-size:13px;line-height:1.45;color:var(--ink-soft)}
+
+  /* ---------- sections ---------- */
+  section{position:relative;scroll-margin-top:86px}
+  .section{padding:88px 0}
+  .section-head{max-width:640px;margin-bottom:40px}
+  .kicker{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-deep);margin:0 0 12px}
+  h2{font-family:var(--serif);font-weight:600;font-size:clamp(36px,4.6vw,54px);line-height:1.04;letter-spacing:-.03em;margin:0 0 14px;font-variation-settings:"SOFT" 40,"WONK" 1}
+  .section-head p{margin:0;color:var(--ink-soft);font-size:16.5px;max-width:58ch}
+
+  /* ---------- downloads ---------- */
+  .builds{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+  .build-card{
+    grid-column:span 2;display:flex;flex-direction:column;gap:12px;position:relative;
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;
+    transition:transform .2s,border-color .2s,box-shadow .2s
+  }
+  .build-card:hover{transform:translateY(-3px);border-color:#CDB98F;box-shadow:var(--shadow-sm)}
+  .build-card.span3{grid-column:span 3}
+  .build-card.is-rec{background:linear-gradient(155deg,var(--amber-soft),var(--surface) 72%);border-color:#E6C67B}
+  .build-card[data-abi="universal"]{background:linear-gradient(155deg,rgba(213,241,225,.55),var(--surface) 72%);border-color:#BFDCCB}
+  .build-card.is-detected{outline:2px solid var(--green);outline-offset:3px}
+  .build-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .build-abi{font-family:var(--mono);font-size:15px;font-weight:700;letter-spacing:-.01em}
+  .badge{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--amber);color:var(--amber-ink);padding:4px 9px;border-radius:999px}
+  .build-for{margin:-4px 0 0;font-size:13.5px;color:var(--ink-soft)}
+  .build-meta{display:flex;align-items:baseline;gap:9px;margin-top:auto}
+  .build-size{font-family:var(--serif);font-size:30px;font-weight:600;letter-spacing:-.02em}
+  .build-bytes{font-family:var(--mono);font-size:10.5px;color:var(--ink-soft)}
+  .build-link{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;text-decoration:none;
+    border:1px solid var(--line);border-radius:11px;padding:10px 13px;font-size:14px;font-weight:600;
+    min-height:48px;transition:background .18s,color .18s,border-color .18s
+  }
+  .build-link svg{width:16px;height:16px;stroke:currentColor;transition:transform .18s}
+  .build-link:hover{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+  .build-link:hover svg{transform:translateX(3px)}
+  .build-sha{margin-top:-2px}
+  .build-sha summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:7px;min-height:46px;
+    font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft)
+  }
+  .build-sha summary::-webkit-details-marker{display:none}
+  .build-sha summary::before{content:"";width:6px;height:6px;border-radius:50%;border:1.5px solid var(--amber-deep);flex:none}
+  .build-sha[open] summary::before{background:var(--amber-deep)}
+  .build-sha code{display:block;font-family:var(--mono);font-size:10.5px;line-height:1.55;color:var(--ink-soft);background:var(--paper-2);border-radius:9px;padding:10px;overflow-wrap:anywhere}
+  .downloads-note{margin:22px 0 0;font-size:13px;color:var(--ink-soft);max-width:70ch}
+  .downloads-note b{color:var(--ink)}
+
+  /* ---------- screenshots ---------- */
+  .screens{background:linear-gradient(180deg,rgba(244,237,223,0),rgba(244,237,223,.85) 18%,rgba(244,237,223,.85) 82%,rgba(244,237,223,0))}
+  .gallery{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 22px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+  .shot{flex:0 0 clamp(186px,17vw,196px);margin:0;scroll-snap-align:center}
+  .mini-phone{background:#2B241C;border-radius:28px;padding:6px;box-shadow:var(--shadow-sm)}
+  .mini-phone img{display:block;width:100%;height:auto;border-radius:22px;aspect-ratio:9/20;object-fit:cover;background:var(--paper-2)}
+  .shot figcaption{margin-top:12px;text-align:center;font-size:13px;color:var(--ink-soft)}
+  .shot figcaption b{display:block;font-family:var(--serif);font-size:15px;color:var(--ink);font-weight:600;margin-bottom:1px}
+
+  /* ---------- arabic ---------- */
+  .arabic{background:var(--espresso);color:var(--cream);overflow:hidden}
+  .arabic::before{
+    content:"";position:absolute;width:560px;height:560px;border-radius:50%;right:-140px;top:-220px;
+    background:radial-gradient(closest-side,rgba(240,194,88,.22),transparent)
+  }
+  .arabic-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;direction:rtl;padding:86px 0}
+  .arabic .kicker{color:var(--amber)}
+  .arabic h2{font-family:var(--ar);font-weight:700;font-size:clamp(32px,4.2vw,48px);line-height:1.35;letter-spacing:0;margin:0 0 18px}
+  .arabic p{font-family:var(--ar);font-size:16.5px;line-height:1.85;color:rgba(247,241,231,.78);margin:0 0 20px;max-width:52ch}
+  .arabic ul{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:10px;font-family:var(--ar);font-size:15px}
+  .arabic li{display:flex;align-items:center;gap:10px;color:rgba(247,241,231,.9)}
+  .arabic li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--amber);flex:none}
+  .arabic .btn-main{background:var(--amber);color:var(--amber-ink);font-family:var(--ar)}
+  .arabic .btn-text{text-align:right}
+  .arabic .btn-text small{color:#5B4310}
+  .arabic .btn-icon{background:var(--amber-ink)}
+  .arabic .btn-icon svg{stroke:var(--amber)}
+  .arabic-device{display:flex;justify-content:center}
+  .arabic-device .phone{width:min(238px,60vw);transform:rotate(-3deg);box-shadow:0 40px 70px -30px rgba(0,0,0,.7)}
+
+  /* ---------- install ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:8px}
+  .step{border-top:1px solid var(--line);padding-top:22px}
+  .step-num{font-family:var(--serif);font-size:52px;line-height:1;font-weight:600;color:var(--amber-deep);opacity:.38}
+  .step h3{font-size:17px;margin:14px 0 6px;letter-spacing:-.01em}
+  .step p{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink-soft)}
+  .note{
+    display:flex;gap:14px;align-items:flex-start;margin-top:44px;padding:18px 20px;
+    background:var(--green-soft);border-radius:14px;color:var(--green-ink);font-size:14px;line-height:1.6
+  }
+  .note svg{width:20px;height:20px;stroke:currentColor;flex:none;margin-top:1px}
+  .note b{font-weight:700}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);padding:36px 0 46px;font-size:13px;color:var(--ink-soft)}
+  .foot{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start;justify-content:space-between}
+  .foot-brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--ink)}
+  .foot-brand .brand-mark{width:26px;height:26px}
+  .foot-brand .brand-mark svg{width:16px;height:16px}
+  .foot-links{display:flex;flex-wrap:wrap;gap:18px}
+  .foot-links a{text-decoration:none;transition:color .18s}
+  .foot-links a:hover{color:var(--ink)}
+  .foot small{display:block;margin-top:18px;line-height:1.6;max-width:70ch}
+  .foot small b{color:var(--ink);font-weight:600}
+
+  /* ---------- motion ---------- */
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .hero-copy > *{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+  .hero-copy > *:nth-child(2){animation-delay:.06s}
+  .hero-copy > *:nth-child(3){animation-delay:.12s}
+  .hero-copy > *:nth-child(4){animation-delay:.18s}
+  .hero-copy > *:nth-child(5){animation-delay:.24s}
+  .hero-copy > *:nth-child(6){animation-delay:.3s}
+  .devices{animation:rise .9s .15s cubic-bezier(.2,.7,.2,1) both}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:960px){
+    .hero{grid-template-columns:1fr;gap:36px;padding:52px 0 56px}
+    .lede{max-width:60ch}
+    .devices{min-height:500px;margin-top:6px}
+    .feature-grid{grid-template-columns:repeat(2,1fr)}
+    .feature:nth-child(3){border-left:0}
+    .feature:nth-child(n+3){border-top:1px solid var(--line-soft)}
+    .arabic-grid{grid-template-columns:1fr;gap:40px;padding:64px 0}
+    .arabic-device{order:-1}
+    .steps{grid-template-columns:1fr;gap:24px}
+    .build-card,.build-card.span3{grid-column:span 3}
+  }
+  @media (max-width:640px){
+    .wrap{padding:0 18px}
+    .nav-inner{padding:12px 18px;gap:14px}
+    .nav-links a:not(.nav-gh){display:none}
+    .nav-version{display:none}
+    .hero{padding:38px 0 46px}
+    h1{font-size:clamp(48px,15vw,68px)}
+    .lede{font-size:16px}
+    .devices{min-height:430px}
+    .phone-front{width:min(224px,62vw)}
+    .phone-back{width:min(164px,44vw);left:auto;right:-8px;top:4%}
+    .chip{font-size:11px;padding:7px 10px}
+    .section{padding:62px 0}
+    .builds{grid-template-columns:1fr}
+    .build-card,.build-card.span3{grid-column:auto}
+    .build-size{font-size:27px}
+    .feature{flex-direction:column;gap:10px;padding:20px 18px}
+    .feature-icon{width:36px;height:36px}
+    .gallery{gap:14px}
+    .shot{flex-basis:172px}
+    .arabic-grid{padding:54px 0}
+    .foot{flex-direction:column;gap:14px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
 </style>
 </head>
-<body>
-<div class="wrap">
-  <header>
-    <div class="logo">K</div>
-    <h1>Kurmanji-TTS</h1>
-    <p class="tag">Offline Kurmanji (Northern Kurdish) text-to-speech for Android — 90 voices, no internet permission, no accounts.</p>
-  </header>
+<body id="top">
+<div class="grain" aria-hidden="true"></div>
+<a class="skip" href="#downloads">Skip to downloads</a>
 
-  <div class="hero">
-    <p class="detected">Version 1.0 · Android 7.0+ · checked 2026-11-19</p>
-    <a class="btn" id="mainBtn" href="https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0.apk">Download for your device</a>
-    <p class="detected" id="why">Pick the exact build below if the automatic choice is wrong for your phone.</p>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#281B00" stroke-width="2.2" stroke-linecap="round"><path d="M4 11v2M8 8v8M12 5v14M16 9v6M20 11v2"/></svg>
+      </span>
+      <span>Kurmanji-TTS</span>
+    </a>
+    <span class="nav-version">v1.0</span>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#downloads">Downloads</a>
+      <a href="#screens">Screens</a>
+      <a href="#install">Install</a>
+      <a class="nav-gh" href="https://github.com/kban19/kurmanji-tts-android">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        GitHub
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span> Offline · Android 7.0+ · v1.0</p>
+        <h1>Kurmanji,<br><em>out loud.</em></h1>
+        <p class="lede">Ninety neural voices, a two-voice dialogue studio and a system-wide TTS engine — running <b>entirely on your phone</b>. No internet, no accounts, no telemetry.</p>
+        <div class="cta-row">
+          <a class="btn-main" id="mainDownload" href="https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0.apk">
+            <span class="btn-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 20h16"/></svg>
+            </span>
+            <span class="btn-text"><strong id="mainDownloadLabel">Download the universal APK</strong><small id="mainDownloadSize">197 MB</small></span>
+          </a>
+          <a class="btn-ghost" href="#downloads">All builds
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14m0 0 6-6m-6 6-6-6"/></svg>
+          </a>
+        </div>
+        <p class="detect">Detected build: <b id="detected">universal</b> · <a href="#downloads">not your device?</a></p>
+        <ul class="trust">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg> No INTERNET permission</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg> 90 voices bundled</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg> Signed APKs</li>
+        </ul>
+      </div>
+
+      <div class="devices" aria-hidden="true">
+        <div class="phone phone-back"><img src="screenshots/06_voices.png" alt="" width="900" height="2000" loading="eager"></div>
+        <div class="phone phone-front"><img src="screenshots/01_home.png" alt="" width="900" height="2000" loading="eager"></div>
+        <span class="chip chip-voices"><i></i> 90 voices</span>
+        <span class="chip chip-offline"><i></i> 100% on-device</span>
+      </div>
+    </section>
   </div>
 
-  <h2>All downloads</h2>
-  <div class="card" style="padding:6px 12px">
-    <table>
-      <thead><tr><th>Build</th><th>File</th><th>Size</th></tr></thead>
-      <tbody>
-        <tr data-abi="arm64-v8a" class="rec"><td><b>arm64-v8a</b> <span class="pill">recommended for phones</span></td>
-          <td class="name"><a href="https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0-arm64-v8a.apk">Kurmanji-TTS-v1.0.0-arm64-v8a.apk</a><div class="sha">ba22f952a8cfebc409e71d49d1a1d3113af061f4ba0e5f63c0368d28fc8f3a75</div></td>
-          <td>106 MB (111,632,217 bytes)</td></tr>
-        <tr data-abi="armeabi-v7a"><td><b>armeabi-v7a</b> <span class="pill">older 32-bit phones</span></td>
-          <td class="name"><a href="https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0-armeabi-v7a.apk">Kurmanji-TTS-v1.0.0-armeabi-v7a.apk</a><div class="sha">4b6bedb39b062cd7912ca6cbb5ae68de6a6a201a5a4b08955ae556a0f685d768</div></td>
-          <td>98 MB (102,278,247 bytes)</td></tr>
-        <tr data-abi="x86_64"><td><b>x86_64</b> <span class="pill">emulators</span></td>
-          <td class="name"><a href="https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0-x86_64.apk">Kurmanji-TTS-v1.0.0-x86_64.apk</a><div class="sha">53360d981e60847dc77c71e97f154955db64110f776671eaebe33f17d3974ce8</div></td>
-          <td>111 MB (115,877,555 bytes)</td></tr>
-        <tr data-abi="x86"><td><b>x86</b> <span class="pill">old emulators</span></td>
-          <td class="name"><a href="https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0-x86.apk">Kurmanji-TTS-v1.0.0-x86.apk</a><div class="sha">8070464540ae4a49c52ceff90e41250a3cb32f18c3622318f070f2149394fc67</div></td>
-          <td>112 MB (117,150,776 bytes)</td></tr>
-        <tr data-abi="universal"><td><b>Universal</b> <span class="pill">any device, largest</span></td>
-          <td class="name"><a href="https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0.apk">Kurmanji-TTS-v1.0.0.apk</a><div class="sha">327ad97bace9a2377b0839299181d9ee16866af3ff44f32ee5e1c5d2b30a336e</div></td>
-          <td>197 MB (206,516,330 bytes)</td></tr>
-      </tbody>
-    </table>
+  <section class="features" aria-label="Highlights">
+    <h2 class="sr-only">Highlights</h2>
+    <div class="wrap">
+      <div class="feature-grid">
+        <article class="feature">
+          <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 10v4"/></svg></span>
+          <div><h3>90 neural voices</h3><p>Every speaker in the bundled Kurmanji VITS model, with instant on-device previews.</p></div>
+        </article>
+        <article class="feature">
+          <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h9v8H8l-4 3V6Z"/><path d="M14 10h6v7l-3-2h-3v-5Z"/></svg></span>
+          <div><h3>Dialogue Studio</h3><p>Give two speakers different voices and render the conversation as one file.</p></div>
+        </article>
+        <article class="feature">
+          <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 6h2"/></svg></span>
+          <div><h3>System-wide TTS</h3><p>Pick Kurmanji-TTS in Android settings and let TalkBack, readers and apps speak.</p></div>
+        </article>
+        <article class="feature">
+          <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v6c0 4.5 3.2 7.7 7.5 9 4.3-1.3 7.5-4.5 7.5-9V6L12 3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <div><h3>Nothing to grant</h3><p>No storage, microphone or network access. WAV export uses MediaStore.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="section" id="downloads">
+      <div class="section-head">
+        <p class="kicker">Downloads</p>
+        <h2>Pick the build that fits.</h2>
+        <p>Every APK carries the full 90-speaker model, so nothing is fetched later. The per-architecture builds simply leave out the native libraries your phone does not need — about 90 MB less to download.</p>
+      </div>
+
+      <div class="builds">
+        <article class="build-card span3 is-rec" data-abi="arm64-v8a">
+          <div class="build-top"><span class="build-abi">arm64-v8a</span><span class="badge">Recommended</span></div>
+          <p class="build-for">Almost every Android phone released since 2016.</p>
+          <div class="build-meta"><span class="build-size">106 MB</span><span class="build-bytes">111,632,217 bytes</span></div>
+          <a class="build-link" href="https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0-arm64-v8a.apk"><span>Download APK</span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0 5-5m-5 5-5-5M5 20h14"/></svg></a>
+          <details class="build-sha"><summary>SHA-256</summary><code>ba22f952a8cfebc409e71d49d1a1d3113af061f4ba0e5f63c0368d28fc8f3a75</code></details>
+        </article>
+
+        <article class="build-card span3" data-abi="armeabi-v7a">
+          <div class="build-top"><span class="build-abi">armeabi-v7a</span></div>
+          <p class="build-for">Older 32-bit phones. Same app, smaller native libraries.</p>
+          <div class="build-meta"><span class="build-size">98 MB</span><span class="build-bytes">102,278,247 bytes</span></div>
+          <a class="build-link" href="https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0-armeabi-v7a.apk"><span>Download APK</span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0 5-5m-5 5-5-5M5 20h14"/></svg></a>
+          <details class="build-sha"><summary>SHA-256</summary><code>4b6bedb39b062cd7912ca6cbb5ae68de6a6a201a5a4b08955ae556a0f685d768</code></details>
+        </article>
+
+        <article class="build-card" data-abi="x86_64">
+          <div class="build-top"><span class="build-abi">x86_64</span></div>
+          <p class="build-for">Modern Android emulators.</p>
+          <div class="build-meta"><span class="build-size">111 MB</span><span class="build-bytes">115,877,555 bytes</span></div>
+          <a class="build-link" href="https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0-x86_64.apk"><span>Download APK</span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0 5-5m-5 5-5-5M5 20h14"/></svg></a>
+          <details class="build-sha"><summary>SHA-256</summary><code>53360d981e60847dc77c71e97f154955db64110f776671eaebe33f17d3974ce8</code></details>
+        </article>
+
+        <article class="build-card" data-abi="x86">
+          <div class="build-top"><span class="build-abi">x86</span></div>
+          <p class="build-for">Older 32-bit emulators.</p>
+          <div class="build-meta"><span class="build-size">112 MB</span><span class="build-bytes">117,150,776 bytes</span></div>
+          <a class="build-link" href="https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0-x86.apk"><span>Download APK</span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0 5-5m-5 5-5-5M5 20h14"/></svg></a>
+          <details class="build-sha"><summary>SHA-256</summary><code>8070464540ae4a49c52ceff90e41250a3cb32f18c3622318f070f2149394fc67</code></details>
+        </article>
+
+        <article class="build-card" data-abi="universal">
+          <div class="build-top"><span class="build-abi">Universal</span><span class="badge" style="background:var(--green-soft);color:var(--green-ink)">Safe choice</span></div>
+          <p class="build-for">Works on every device, including the ones above.</p>
+          <div class="build-meta"><span class="build-size">197 MB</span><span class="build-bytes">206,516,330 bytes</span></div>
+          <a class="build-link" href="https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0.apk"><span>Download APK</span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0 5-5m-5 5-5-5M5 20h14"/></svg></a>
+          <details class="build-sha"><summary>SHA-256</summary><code>327ad97bace9a2377b0839299181d9ee16866af3ff44f32ee5e1c5d2b30a336e</code></details>
+        </article>
+      </div>
+
+      <p class="downloads-note">All builds share one signing key, so switching between them updates in place. Verify a file with <code>sha256sum &lt;file&gt;</code> or <code>certutil -hashfile &lt;file&gt; SHA256</code>, or compare against <a href="https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/SHA256SUMS.txt" style="color:var(--amber-deep);font-weight:600">SHA256SUMS.txt</a>. Build checked 2026-11-19.</p>
+    </section>
   </div>
 
-  <h2>Install</h2>
-  <div class="card">
-    <ol>
-      <li>Download the file that matches your phone (the button above chooses it for you).</li>
-      <li>Open the file and allow your browser or file manager to install unknown apps when Android asks.</li>
-      <li>Open <b>Kurmanji-TTS</b> → <b>Settings → On-device Model → Load model</b> once, then type Kurmanji text and press <b>Generate Speech</b>.</li>
-    </ol>
-    <p style="margin:14px 0 0;color:var(--muted);font-size:14px">
-      Not sure which one? Use the <b>Universal</b> build — it works on every device and only costs more download size.
-      Each build is signed with the same key, so they update each other without uninstalling.
-      Verify a download with <code>sha256sum &lt;file&gt;</code> against the hash under its name.
-    </p>
-  </div>
+  <section class="screens" id="screens">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">A look inside</p>
+        <h2>A quiet studio in your pocket.</h2>
+        <p>Generate speech, audition all 90 voices, stage a two-voice dialogue and keep every export in local history.</p>
+      </div>
+      <div class="gallery" tabindex="0" aria-label="Application screenshots, scroll horizontally">
+        <figure class="shot"><div class="mini-phone"><img src="screenshots/01_home.png" alt="Generate screen with Kurmanji text and the amber Generate Speech button" width="900" height="2000" loading="lazy"></div><figcaption><b>Generate</b>Type, insert ç ê î ş û, press play.</figcaption></figure>
+        <figure class="shot"><div class="mini-phone"><img src="screenshots/06_voices.png" alt="Voice picker listing 90 speakers with M, F and U filters" width="900" height="2000" loading="lazy"></div><figcaption><b>90 voices</b>Preview and pick any speaker.</figcaption></figure>
+        <figure class="shot"><div class="mini-phone"><img src="screenshots/08_dialogue.png" alt="Dialogue Studio with Speaker A and Speaker B script" width="900" height="2000" loading="lazy"></div><figcaption><b>Dialogue Studio</b>Two speakers, one file.</figcaption></figure>
+        <figure class="shot"><div class="mini-phone"><img src="screenshots/04_result.png" alt="Synthesis result with waveform player and export actions" width="900" height="2000" loading="lazy"></div><figcaption><b>Result</b>Waveform, WAV export, share.</figcaption></figure>
+        <figure class="shot"><div class="mini-phone"><img src="screenshots/07_history.png" alt="Local history of exported recordings" width="900" height="2000" loading="lazy"></div><figcaption><b>History</b>Every export stays on device.</figcaption></figure>
+      </div>
+    </div>
+  </section>
 
-  <h2 class="ar">التحميل بالعربية</h2>
-  <div class="card ar">
-    <p>هذه نسخة كاملة تعمل دون إنترنت: 90 صوتاً، بدون أي صلاحية إنترنت، وبدون حسابات.</p>
-    <ol>
-      <li>اضغط زر التحميل في الأعلى — تختار الصفحة النسخة المناسبة لهاتفك تلقائياً.</li>
-      <li>افتح الملف واسمح بتثبيت التطبيقات من هذا المصدر عند الطلب.</li>
-      <li>افتح التطبيق ← <b>الإعدادات</b> ← <b>تحميل النموذج</b> مرة واحدة، ثم اكتب النص واضغط <b>توليد الكلام</b>.</li>
-    </ol>
-    <p style="color:var(--muted)">إذا لم تعرف نوع معمارية جهازك فاختر <b>Universal</b>؛ سيعمل على كل الأجهزة لكن حجمه أكبر.
-    جميع النسخ موقّعة بنفس المفتاح، لذا تُحدّث إحداها الأخرى دون حذف.</p>
-  </div>
+  <section class="arabic" lang="ar" dir="rtl">
+    <div class="wrap">
+      <div class="arabic-grid">
+        <div>
+          <p class="kicker">بالعربية</p>
+          <h2>كُرديّة تُنطَق…<br>بلا إنترنت.</h2>
+          <p>يحوّل <b>Kurmanji-TTS</b> النص الكردي الكرمانجي إلى كلام طبيعي على هاتفك: 90 صوتاً، استوديو حوار بصوتين، ومحرّك نطق لكل التطبيقات. لا اتصال، ولا حسابات، ولا تتبّع.</p>
+          <ul>
+            <li>يعمل دون اتصال بالكامل، والنموذج مضمّن داخل التطبيق</li>
+            <li>لا يطلب صلاحية الإنترنت ولا صلاحيات التخزين</li>
+            <li>تصدير WAV إلى مجلد التنزيلات ومشاركته مع أي تطبيق</li>
+          </ul>
+          <a class="btn-main" href="#downloads">
+            <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 20h16"/></svg></span>
+            <span class="btn-text"><strong>حمّل النسخة المناسبة لهاتفك</strong><small>إن لم تعرف المعمارية فاختر Universal</small></span>
+          </a>
+        </div>
+        <div class="arabic-device" aria-hidden="true">
+          <div class="phone"><img src="screenshots/10_home_ar.png" alt="" width="900" height="2000" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <h2>Also on this page</h2>
-  <div class="card">
-    <p style="margin:0">
-      <a href="https://github.com/kban19/kurmanji-tts-android/releases/tag/v1.0.0">Release notes</a> ·
-      <a href="https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/SHA256SUMS.txt">SHA256SUMS.txt</a> ·
-      <a href="https://github.com/kban19/kurmanji-tts-android#readme">Documentation</a> ·
-      <a href="https://github.com/kban19/kurmanji-tts-android/blob/main/LICENSE">License</a>
-    </p>
+  <div class="wrap">
+    <section class="section" id="install">
+      <div class="section-head">
+        <p class="kicker">Install</p>
+        <h2>Three steps, then it speaks.</h2>
+      </div>
+      <div class="steps">
+        <article class="step">
+          <div class="step-num">01</div>
+          <h3>Download your build</h3>
+          <p>The button at the top picks the right architecture automatically. If you are on a computer, use the Universal APK or scan the page on your phone.</p>
+        </article>
+        <article class="step">
+          <div class="step-num">02</div>
+          <h3>Allow the install</h3>
+          <p>Android asks once to allow installs from your browser or file manager. The APK is signed and needs no account; if a build signed with another key exists, uninstall it first.</p>
+        </article>
+        <article class="step">
+          <div class="step-num">03</div>
+          <h3>Load the model once</h3>
+          <p>Open <b>Settings → On-device Model → Load model</b>. It takes a few seconds and stays in memory. Then type Kurmanji text and press <b>Generate Speech</b>.</p>
+        </article>
+      </div>
+      <div class="note">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v6c0 4.5 3.2 7.7 7.5 9 4.3-1.3 7.5-4.5 7.5-9V6L12 3Z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span><b>Not sure which one?</b> Take the Universal build — it installs everywhere and only costs extra download size. The app itself never requests the INTERNET permission; everything above happens offline.</span>
+      </div>
+    </section>
   </div>
+</main>
 
-  <footer>
-    Proprietary software © 2026 Sipano. Free to download and use.<br>
-    Kurmanji-TTS does not request the INTERNET permission; everything runs on the device.
-  </footer>
-</div>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <div class="foot-brand">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#281B00" stroke-width="2.2" stroke-linecap="round"><path d="M4 11v2M8 8v8M12 5v14M16 9v6M20 11v2"/></svg></span>
+          Kurmanji-TTS
+        </div>
+        <small>Proprietary software © 2026 <b>Sipano</b> · <a href="https://www.instagram.com/sipan0o" style="color:var(--amber-deep);text-decoration:none;font-weight:600">@sipan0o</a><br>Free to download and use. The app does not request the INTERNET permission; everything runs on the device.</small>
+      </div>
+      <div class="foot-links">
+        <a href="https://github.com/kban19/kurmanji-tts-android/releases/tag/v1.0.0">Release notes</a>
+        <a href="https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/SHA256SUMS.txt">SHA-256 sums</a>
+        <a href="https://github.com/kban19/kurmanji-tts-android#readme">Documentation</a>
+        <a href="https://github.com/kban19/kurmanji-tts-android/blob/main/LICENSE">License</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script>
   const BUILDS = {
-    "arm64-v8a":   { url: "https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0-arm64-v8a.apk",     size: "106 MB (111,632,217 bytes)" },
-    "armeabi-v7a": { url: "https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0-armeabi-v7a.apk",      size: "98 MB (102,278,247 bytes)" },
-    "x86_64":      { url: "https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0-x86_64.apk",       size: "111 MB (115,877,555 bytes)" },
-    "x86":         { url: "https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0-x86.apk",       size: "112 MB (117,150,776 bytes)" },
-    "universal":   { url: "https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0.apk", size: "197 MB (206,516,330 bytes)" }
+    "arm64-v8a":   { url: "https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0-arm64-v8a.apk",     size: "106 MB" },
+    "armeabi-v7a": { url: "https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0-armeabi-v7a.apk",      size: "98 MB" },
+    "x86_64":      { url: "https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0-x86_64.apk",       size: "111 MB" },
+    "x86":         { url: "https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0-x86.apk",       size: "112 MB" },
+    "universal":   { url: "https://github.com/kban19/kurmanji-tts-android/releases/download/v1.0.0/Kurmanji-TTS-v1.0.0.apk", size: "197 MB" }
   };
 
   async function detectAbi() {
@@ -144,26 +545,36 @@
         if (v.architecture === "arm") return v.bitness === "64" ? "arm64-v8a" : "armeabi-v7a";
         if (v.architecture === "x86") return v.bitness === "64" ? "x86_64" : "x86";
       }
-    } catch (e) { /* fall through to the user agent */ }
+    } catch (e) { /* fall back to the user agent */ }
     if (/arm64|aarch64/i.test(ua)) return "arm64-v8a";
     if (/x86_64|WOW64|Win64/i.test(ua)) return "x86_64";
     if (/\bi686|x86\b/i.test(ua)) return "x86";
-    // Every Android phone released since ~2016 is arm64; that is the safe default.
     return "arm64-v8a";
   }
 
-  detectAbi().then(abi => {
+  detectAbi().then(function (abi) {
     const build = BUILDS[abi] || BUILDS.universal;
-    const btn = document.getElementById("mainBtn");
+    const btn = document.getElementById("mainDownload");
     btn.href = build.url;
-    btn.textContent = abi === "universal"
-      ? "Download the universal APK (" + build.size + ")"
-      : "Download for " + abi + " (" + build.size + ")";
-    document.getElementById("why").innerHTML =
-      "Detected build: <b>" + abi + "</b>. If it does not install, use another row below.";
-    document.querySelectorAll("tbody tr").forEach(tr => {
-      if (tr.dataset.abi === abi) tr.style.outline = "2px solid #3ea6ff";
-    });
+    document.getElementById("mainDownloadLabel").textContent =
+      abi === "universal" ? "Download the universal APK" : "Download for " + abi;
+    document.getElementById("mainDownloadSize").textContent = build.size;
+    document.getElementById("detected").textContent = abi;
+    const card = document.querySelector('.build-card[data-abi="' + abi + '"]');
+    if (card) card.classList.add("is-detected");
+  });
+
+  const observer = "IntersectionObserver" in window
+    ? new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { entry.target.classList.add("in"); observer.unobserve(entry.target); }
+        });
+      }, { threshold: 0.12 })
+    : null;
+
+  document.querySelectorAll(".build-card, .feature, .step, .shot, .note").forEach(function (el) {
+    el.classList.add("reveal");
+    if (observer) observer.observe(el); else el.classList.add("in");
   });
 </script>
 </body>
